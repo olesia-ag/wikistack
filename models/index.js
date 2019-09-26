@@ -1,15 +1,7 @@
 const Sequelize = require('sequelize');
 const db = new Sequelize('postgres://localhost:5432/wikistack');
 
-function generateSlug(page) {
-  // Removes all non-alphanumeric characters from title
-  // And make whitespace underscore
-  console.log(page);
-  console.log(page.title);
-  if (!page.slug) {
-    page.slug = page.title.replace(/\s+/g, '_').replace(/\W/g, '');
-  }
-}
+
 
 const Page = db.define('page', {
   title: {
@@ -30,7 +22,15 @@ const Page = db.define('page', {
   }
 });
 
-Page.beforeValidate(Page.slug, generateSlug(Page));
+Page.beforeValidate(function (page) {
+  // Removes all non-alphanumeric characters from title
+  // And make whitespace underscore
+  console.log(page);
+  console.log(page.title);
+  if (!page.slug) {
+    page.slug = page.title.replace(/\s+/g, '_').replace(/\W/g, '');
+  }
+});
 
 const User = db.define('user', {
   name: {
