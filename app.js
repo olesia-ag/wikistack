@@ -1,7 +1,7 @@
 const express = require('express');
 const morgan = require('morgan');
 const layout=require('./views/layout');
-
+const models = require('./models');
 const app = express();
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
@@ -12,7 +12,15 @@ app.get("/", (req, res) => {
   res.send(layout(''));
 })
 
-const PORT = 3000;
-app.listen(PORT, () => {
-  console.log(`App listening in port ${PORT}`);
-});
+const connectToDB = async() => {
+  await models.Page.sync();
+  await models.User.sync();
+
+  const PORT = 3000;
+  app.listen(PORT, () => {
+    console.log(`App listening in port ${PORT}`);
+  });
+}
+connectToDB();
+
+
