@@ -1,8 +1,17 @@
 const express = require('express');
 const router=express.Router();
+const { User } = require('../models');
 
 router.get('/', (req, res) => {
-  res.send('<h1>get all uses, do not change the db</h1>');
+  // try {
+  //   const allUsers = await User.findAll();
+  //   const returnedUsers = mainPage(allPages);
+  //   res.send(returnedPage);
+  // } catch (error) {
+  //   console.log(error);
+  // }
+  // res.redirect('/wiki');
+  // next()
 })
 
 router.get('/:id', (req, res) => {
