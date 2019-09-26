@@ -10,8 +10,9 @@ app.use(express.json());
 app.use(morgan('dev'));
 app.use(express.static(__dirname + '/public'));
 //app.use("/posts", require("./routes/posts"));
-app.get("/", (req, res) => {
+app.get("/", (req, res, next) => {
   res.send(layout(''));
+  next()
 })
 app.use("/wiki", wiki);
 app.use("/user", user);

@@ -1,14 +1,26 @@
 const express = require('express');
 const router=express.Router();
 
-router.get("/", (req,res)=>{
-  res.send('got to all wiki pages');
+router.get('/', (req, res) => {
+  res.send('<h1>get all uses, do not change the db</h1>');
 })
-router.post("/", (rew,res)=>{
-  res.send('submit a new page to database');
+
+router.get('/:id', (req, res) => {
+  res.send('get user by user id');
 })
-router.get("/add", (req,res)=>{
-  res.send('go to add page');
+
+router.post('/', (req, res) => {
+  res.send('create a user in the db');
 })
+
+router.put('/:id', (req, res) => {
+  res.send('updates user by id in the db');
+})
+
+router.delete('/:id', (req, res) => {
+  res.send('deletes user by id from the db');
+})
+
+
 
 module.exports = router;
